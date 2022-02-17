@@ -2,14 +2,67 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 
+const containerVariants = {
+  hidden: {
+    opacity: 0,
+    x: '100vw',
+  },
+  visible: {
+    opacity: 1,
+    x: 0,
+    transition: {
+      duration: 0.5,
+      type: 'spring',
+    },
+  },
+};
+
+const basesVariants = {
+  hover: {
+    scale: 1.3,
+    originX: 0,
+    color: '#f8e112',
+    transition: {
+      type: 'spring',
+      stiffness: 300,
+    },
+  },
+};
+
+const nextContainerVariants = {
+  hidden: { x: '-200vw' },
+  visible: {
+    x: 0,
+    transition: {
+      duration: 1,
+      type: 'spring',
+      stiffness: 100,
+    },
+  },
+};
+
+const nextButtonVariants = {
+  hidden: { opacity: 0 },
+  visible: { opacity: 1 },
+  hover: {
+    scale: 1.2,
+    textShadow: '0px 0px 8px rgb(255, 255, 255)',
+    boxShadow: '0px 0px 8px rgb(255, 255, 255)',
+  },
+};
+
 const Base = ({ addBase, pizza }) => {
   const bases = ['Classic', 'Thin & Crispy', 'Thick Crust'];
 
   return (
     <motion.div
-      initial={{ x: '100vw' }}
-      animate={{ x: '0vw' }}
-      transition={{ duration: 1, type: 'spring' }}
+      // initial={{ x: '100vw' }}
+      // animate={{ x: '0vw' }}
+      //variants are used to replace the above initial and animate
+      variants={containerVariants}
+      initial='hidden'
+      animate='visible'
+      //no need to apply transition since its embedded in the containerVariants
       className='base container'
     >
       <h3>Step 1: Choose Your Base</h3>
@@ -17,30 +70,22 @@ const Base = ({ addBase, pizza }) => {
         {bases.map((base) => {
           let spanClass = pizza.base === base ? 'active' : '';
           return (
-            <li key={base} onClick={() => addBase(base)}>
+            <motion.li
+              variants={basesVariants}
+              whileHover='hover'
+              key={base}
+              onClick={() => addBase(base)}
+            >
               <span className={spanClass}>{base}</span>
-            </li>
+            </motion.li>
           );
         })}
       </ul>
 
       {pizza.base && (
-        <motion.div
-          transition={{ duration: 1, type: 'spring', stiffness: 100 }}
-          initial={{ x: -2000 }}
-          animate={{ x: 0 }}
-          className='next'
-        >
+        <motion.div variants={nextContainerVariants} className='next'>
           <Link to='/toppings'>
-            <motion.button
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              whileHover={{
-                scale: 1.2,
-                textShadow: '0px 0px 8px rgb(255, 255, 255)',
-                boxShadow: '0px 0px 8px rgb(255, 255, 255)',
-              }}
-            >
+            <motion.button variants={nextButtonVariants} whileHover='hover'>
               Next
             </motion.button>
           </Link>

@@ -2,6 +2,21 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 
+const containerVariants = {
+  hidden: {
+    opacity: 0,
+    x: '100vw',
+  },
+  visible: {
+    opacity: 1,
+    x: 0,
+    transition: {
+      duration: 0.5,
+      type: 'spring',
+    },
+  },
+};
+
 const Toppings = ({ addTopping, pizza }) => {
   let toppings = [
     'mushrooms',
@@ -14,9 +29,9 @@ const Toppings = ({ addTopping, pizza }) => {
 
   return (
     <motion.div
-      initial={{ x: '100vw' }}
-      animate={{ x: '0vw' }}
-      transition={{ duration: 1, type: 'spring' }}
+      variants={containerVariants}
+      initial='hidden'
+      animate='visible'
       className='toppings container'
     >
       <h3>Step 2: Choose Toppings</h3>
@@ -24,9 +39,14 @@ const Toppings = ({ addTopping, pizza }) => {
         {toppings.map((topping) => {
           let spanClass = pizza.toppings.includes(topping) ? 'active' : '';
           return (
-            <li key={topping} onClick={() => addTopping(topping)}>
+            <motion.li
+              whileHover={{ scale: 1.3, originX: 0, color: '#f8e112' }}
+              transition={{ type: 'spring', stiffness: 300 }}
+              key={topping}
+              onClick={() => addTopping(topping)}
+            >
               <span className={spanClass}>{topping}</span>
-            </li>
+            </motion.li>
           );
         })}
       </ul>
