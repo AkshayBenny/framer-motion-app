@@ -5,6 +5,12 @@ import { motion } from 'framer-motion';
 const containerVariant = {
   hidden: { opacity: 0 },
   visible: { opacity: 1, transition: { delay: 1, duration: 1.5 } },
+  exit: {
+    x: '-100vw',
+    transition: {
+      ease: 'easeInOut',
+    },
+  },
 };
 
 const buttonVariant = {
@@ -14,10 +20,10 @@ const buttonVariant = {
     scale: 1.1,
     textShadow: '0px 0px 8px rgb(255, 255, 255)',
     boxShadow: '0px 0px 8px rgb(255, 255, 255)',
-    transition:{
+    transition: {
       duration: 0.5,
-      yoyo: Infinity
-    }
+      yoyo: Infinity,
+    },
   },
 };
 
@@ -27,6 +33,7 @@ const Home = () => {
       variants={containerVariant}
       initial='hidden'
       animate='visible'
+      exit='exit'
       className='home container'
     >
       <h2>Welcome to Pizza Joint</h2>

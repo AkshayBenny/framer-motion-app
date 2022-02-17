@@ -15,6 +15,12 @@ const containerVariants = {
       type: 'spring',
     },
   },
+  exit: {
+    x: '-100vw',
+    transition: {
+      ease: 'easeOut',
+    },
+  },
 };
 
 const buttonVariant = {
@@ -46,6 +52,7 @@ const Toppings = ({ addTopping, pizza }) => {
       variants={containerVariants}
       initial='hidden'
       animate='visible'
+      exit='exit'
       className='toppings container'
     >
       <h3>Step 2: Choose Toppings</h3>
@@ -66,7 +73,7 @@ const Toppings = ({ addTopping, pizza }) => {
       </ul>
 
       <Link to='/order'>
-        <motion.button varitants={buttonVariant} whileHover='hover'>
+        <motion.button variants={buttonVariant} whileHover='hover'>
           Order
         </motion.button>
       </Link>

@@ -15,6 +15,12 @@ const containerVariants = {
       type: 'spring',
     },
   },
+  exit: {
+    x: '-100vw',
+    transition: {
+      ease: 'easeInOut',
+    },
+  },
 };
 
 const basesVariants = {
@@ -59,14 +65,16 @@ const Base = ({ addBase, pizza }) => {
   const bases = ['Classic', 'Thin & Crispy', 'Thick Crust'];
 
   return (
+    // initial={{ x: '100vw' }}
+    // animate={{ x: '0vw' }}
+    //variants are used to replace the above initial and animate
+    //no need to apply transition since its embedded in the containerVariants
+
     <motion.div
-      // initial={{ x: '100vw' }}
-      // animate={{ x: '0vw' }}
-      //variants are used to replace the above initial and animate
       variants={containerVariants}
       initial='hidden'
       animate='visible'
-      //no need to apply transition since its embedded in the containerVariants
+      exit='exit'
       className='base container'
     >
       <h3>Step 1: Choose Your Base</h3>
