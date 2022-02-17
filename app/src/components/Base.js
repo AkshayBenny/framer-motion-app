@@ -45,9 +45,13 @@ const nextButtonVariants = {
   hidden: { opacity: 0 },
   visible: { opacity: 1 },
   hover: {
-    scale: 1.2,
+    scale: 1.1,
     textShadow: '0px 0px 8px rgb(255, 255, 255)',
     boxShadow: '0px 0px 8px rgb(255, 255, 255)',
+    transition: {
+      duration: 0.5,
+      yoyo: Infinity,
+    },
   },
 };
 
