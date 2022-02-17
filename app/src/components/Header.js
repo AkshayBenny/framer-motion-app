@@ -18,7 +18,7 @@ const Header = () => {
         </svg>
       </div>
       <motion.div
-        transition={{ delay: 1.5, type: 'spring',stiffness:120 }} //default value of type is 'spring'
+        transition={{ delay: 0.5, type: 'spring', stiffness: 120 }} //default value of type is 'spring'
         initial={{ y: -250 }}
         animate={{ y: 0 }}
         className='title'
